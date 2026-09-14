@@ -30,6 +30,7 @@ public class MoveHorizontal : MonoBehaviour
 
         }
     }
+
     IEnumerator MoveTo(float from, float end)
     {
         float percent = 0f;
@@ -39,12 +40,17 @@ public class MoveHorizontal : MonoBehaviour
         while (percent < 1f)
         {
             percent += Time.deltaTime / moveTime;
+
             Vector3 position = transform.position;
-            position.x = Mathf.Lerp( start, end, percent);
-            
+
+            // ★ 수정 1: start → from
+            position.x = Mathf.Lerp(from, end, percent);
+
+            // ★ 수정 2: 이 줄 추가
+            transform.position = position;
+
             yield return null;
 
         }
-
     }
 }
